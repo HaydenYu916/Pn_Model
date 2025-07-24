@@ -101,6 +101,30 @@ def main_loop():
             ppfd = knee.get('PPFD', None)
             pn = knee.get('Pn', None)
 
+            # 新增：将 R:B 写入 rb_command.txt
+            try:
+                if rb is not None:
+                    rb_cmd_path = os.path.join(os.path.dirname(__file__), '../results/rb_command.txt')
+                    # R:B 表示红光比例（如 0.68），B=1-R:B
+                    try:
+                        rb_float = float(rb)
+                        r_pwm = round(rb_float * 255)
+                        b_pwm = round((1 - rb_float) * 255)
+                        rb_str = f"{r_pwm},{b_pwm}"
+                    except Exception:
+                        # 如果不是浮点数，按原逻辑处理
+                        if isinstance(rb, (list, tuple)) and len(rb) == 2:
+                            rb_str = f"{int(rb[0])},{int(rb[1])}"
+                        elif isinstance(rb, str) and "," in rb:
+                            rb_str = rb
+                        else:
+                            rb_str = str(rb)
+                    with open(rb_cmd_path, 'w') as rb_cmd_file:
+                        rb_cmd_file.write(rb_str)
+                    print(f"已写入 R:B 指令到 {rb_cmd_path}: {rb_str}")
+            except Exception as e:
+                print(f"[写入 R:B 指令失败] {e}")
+
             # 6. 结果写入 CSV（带 id）
             # 自动获取当前最大 id
             if os.path.exists(RB_RESULT_CSV):
