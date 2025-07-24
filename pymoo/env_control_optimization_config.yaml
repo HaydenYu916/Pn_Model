@@ -1,0 +1,75 @@
+model:
+  # Pn预测模型路径（请根据实际情况修改）
+  model_path: "../ML_Framework/results_pape/paper_LSSVR_GA_20250715_165047/models/optimized_lssvr_model.pkl"
+
+  # model_path: "../ML_Framework/results_pape/LSSVR_GA_20250715_113420/models/optimized_lssvr_model.pkl"
+
+
+problem:
+  # 优化模式：continuous（连续）或 discrete（离散）
+  optimization_mode: "continuous"  # 可选: "continuous", "discrete"
+  
+  variables:
+    ppfd:
+      min: 0
+      max: 1900
+      values: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000]
+    co2:
+      min: 0
+      max: 2200
+      values: [400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
+  objectives:
+    pn_weight: 0.3    # 降低Pn权重
+    cost_weight: 0.7  # 增加成本权重（更注重节能）
+    enable_normalization: true
+
+cost:
+  # 电费参数
+  k: 0.015        # PPFD->功率系数（kW/μmol·m⁻²·s⁻¹）- 增加电费权重
+  t: 16           # 光照时长(h)
+  E_price: 1.2    # 电价(元/kWh) - 增加电价
+  n: 10           # 灯具数量
+  # CO2成本参数
+  p: 101325       # 气压(Pa)
+  V: 126.72       # 温室体积(m³)
+  R: 8.314        # 气体常数(J/(mol·K))
+  M_CO2: 0.044    # CO₂摩尔质量(kg/mol)
+  C_price: 1.5    # CO₂价格(元/kg) - 增加CO2价格
+  
+  # 边缘成本增加参数（调整）
+  ppfd_min: 0     # PPFD最小值（用于归一化）
+  ppfd_max: 1900  # PPFD最大值（用于归一化）
+  co2_min: 0      # CO2最小值（用于归一化）
+  co2_max: 2200   # CO2最大值（用于归一化）
+  edge_cost_factor: 0.8  # 边缘成本增加系数（从1.2减少到0.8）
+
+algorithm:
+  algorithm_type: "INSGA2"
+  population_size: 100  # 从200减少到100
+  n_generations: 200
+  eliminate_duplicates: true
+
+  insga2:
+    use_nis: true
+    use_curvature_analysis: true
+
+  crossover:
+    type: "SBX"
+    prob: 0.8  # 从0.9减少到0.8
+    eta: 20
+
+  mutation:
+    type: "PM"
+    prob: 0.3  # 从0.5减少到0.3
+    eta: 20
+
+results:
+  folder_prefix: "env_opt_"
+  save_csv: true
+  save_json: true
+  save_config: true
+  save_visualization: true
+  visualization:
+    dpi: 300
+    format: "png"
+    figsize: [12, 8] 

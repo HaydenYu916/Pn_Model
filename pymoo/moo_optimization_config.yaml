@@ -1,0 +1,263 @@
+# 多目标优化配置文件
+# Multi-Objective Optimization Configuration
+
+# 模型配置
+model:
+  # 模型文件路径 - 支持LSSVR和SVR模型
+  # model_path: "../ML_Framework/results/LSSVR_GA_20250715_113420/models/optimized_lssvr_model.pkl"
+  # 备选模型路径：
+  # model_path: "../ML_Framework/results/GPR_TPE_20250717_112350/models/optimized_gpr_model.pkl"
+  model_path: "../ML_Framework/results/GPR_CMAES_20250717_114342/models/optimized_gpr_model.pkl"
+
+# 优化问题配置
+problem:
+  # 变量边界
+  variables:
+    # 优化模式选择
+    # "continuous": 连续优化 - 在[min, max]范围内连续搜索
+    # "discrete": 离散优化 - 仅在values列表中的值搜索
+    optimization_mode: "continuous"
+    
+    ppfd:
+      min: 50     # PPFD最小值 (μmol·m⁻²·s⁻¹)
+      max: 1000   # PPFD最大值 (μmol·m⁻²·s⁻¹)
+      # 详细值列表（间隔50）- 用于discrete模式或可视化参考
+      values: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000]
+    rb_ratio:
+      min: 0.5    # R:B比值最小值
+      max: 1.0    # R:B比值最大值
+      # 详细值列表 - 用于discrete模式或可视化参考
+      values: [0.5, 0.75, 0.83, 0.88, 1.0]
+  
+  # 目标函数权重（用于找最优妥协解）
+  objectives:
+    cled_weight: 0.7  # CLED最小化权重（增加节能重要性）
+    pn_weight: 0.3    # Pn最大化权重（降低产量重要性）
+    
+    # 目标函数归一化设置
+    enable_normalization: true  # 启用[0,1]归一化
+    
+    # 目标函数边界（可选，如果不设置将自动计算）
+    # pn_min: 0.0       # Pn最小值 (μmol·m⁻²·s⁻¹) - 自动计算
+    # pn_max: 40.0      # Pn最大值 (μmol·m⁻²·s⁻¹) - 自动计算
+    # cled_min: 0.0     # CLED最小值 (mg·m⁻²·s⁻¹) - 自动计算
+    # cled_max: 100.0   # CLED最大值 (mg·m⁻²·s⁻¹) - 自动计算
+
+# 多目标优化算法配置
+algorithm:
+  # 算法类型选择
+  # 可选: "NSGA2", "NSGA3", "SPEA2", "MOEAD", "RNSGA2", "RNSGA3", "SMS", "RVEA", "AGE", "AGE2", "CTAEA"
+  algorithm_type: "NSGA2"
+  
+  # 通用参数
+  population_size: 200  # 增加种群数量
+  n_generations: 300   # 增加进化代数
+  eliminate_duplicates: true
+  
+  # NSGA-II 参数
+  nsga2:
+    crossover:
+      type: "SBX"  # Simulated Binary Crossover
+      prob: 0.9
+      eta: 20      # 增加eta值，使交叉更保守
+    mutation:
+      type: "PM"   # Polynomial Mutation
+      prob: 0.15   # 增加变异概率，增加探索
+      eta: 25      # 增加eta值，使变异更保守
+  
+  # NSGA-III 参数
+  nsga3:
+    ref_dirs:
+      type: "das-dennis"  # 参考方向生成方法
+      n_partitions: 12
+    crossover:
+      type: "SBX"
+      prob: 0.9
+      eta: 30
+    mutation:
+      type: "PM"
+      prob: 0.1
+      eta: 20
+  
+  # SPEA2 参数
+  spea2:
+    archive_size: 100
+    crossover:
+      type: "SBX"
+      prob: 0.9
+      eta: 15
+    mutation:
+      type: "PM"
+      prob: 0.1
+      eta: 20
+  
+  # MOEA/D 参数
+  moead:
+    n_neighbors: 15
+    decomposition: "pbi"  # 可选: "tchebi", "pbi", "asf"
+    prob_neighbor_mating: 0.7
+    crossover:
+      type: "SBX"
+      prob: 0.9
+      eta: 20
+    mutation:
+      type: "PM"
+      prob: 0.1
+      eta: 20
+  
+  # R-NSGA-II 参数
+  rnsga2:
+    epsilon: 0.01
+    crossover:
+      type: "SBX"
+      prob: 0.9
+      eta: 15
+    mutation:
+      type: "PM"
+      prob: 0.1
+      eta: 20
+  
+  # R-NSGA-III 参数
+  rnsga3:
+    epsilon: 0.01
+    ref_dirs:
+      type: "das-dennis"
+      n_partitions: 12
+    crossover:
+      type: "SBX"
+      prob: 0.9
+      eta: 30
+    mutation:
+      type: "PM"
+      prob: 0.1
+      eta: 20
+  
+  # SMS-EMOA 参数
+  sms:
+    crossover:
+      type: "SBX"
+      prob: 0.9
+      eta: 15
+    mutation:
+      type: "PM"
+      prob: 0.1
+      eta: 20
+  
+  # RVEA 参数
+  rvea:
+    adaptation_frequency: 0.1
+    crossover:
+      type: "SBX"
+      prob: 0.9
+      eta: 15
+    mutation:
+      type: "PM"
+      prob: 0.1
+      eta: 20
+  
+  # AGE 参数
+  age:
+    crossover:
+      type: "SBX"
+      prob: 0.9
+      eta: 15
+    mutation:
+      type: "PM"
+      prob: 0.1
+      eta: 20
+  
+  # AGE-II 参数
+  age2:
+    crossover:
+      type: "SBX"
+      prob: 0.9
+      eta: 15
+    mutation:
+      type: "PM"
+      prob: 0.1
+      eta: 20
+  
+  # C-TAEA 参数
+  ctaea:
+    crossover:
+      type: "SBX"
+      prob: 0.9
+      eta: 15
+    mutation:
+      type: "PM"
+      prob: 0.1
+      eta: 20
+
+# CLED计算参数
+cled:
+  # CLED计算方法选择
+  # "standard": 使用标准论文公式 (calculate_cled.py)
+  # "detailed": 使用详细工程公式 (calculate_cled_detailed.py)
+  calculation_method: "detailed"
+  
+  # 标准论文参数设置 (calculation_method = "standard")
+  standard:
+    carbon_factor: 581.0        # 碳排因子 (kg CO₂/MWh)
+    surface_area: 1.0           # 照射面积 (m²)
+    conversion_factor: 3600     # 转换因子 (s/h)
+    
+    # LED光量子效率 (调整后匹配论文数值范围)
+    led_efficiency:
+      red: 0.0015    # μmol·s⁻¹·W⁻¹
+      blue: 0.0012   # μmol·s⁻¹·W⁻¹
+    
+    # 系统效率
+    system_efficiency: 1.0      # 100%效率
+  
+  # 详细工程参数设置 (calculation_method = "detailed")
+  detailed:
+    carbon_factor: 581.0        # 碳排因子 (kg CO₂/MWh)
+    surface_area: 1.0           # 照射面积 (m²)
+    conversion_factor: 3600     # 转换因子 (s/h)
+    
+    # 实际LED驱动器规格
+    hardware:
+      constant_current: 1.050   # 恒流驱动电流 (A)
+      max_power_per_driver: 75.0  # 最大功率 (W)
+      red_voltage: 35.0         # 红光LED电压 (V)
+      blue_voltage: 45.0        # 蓝光LED电压 (V)
+      boards_per_channel: 2     # 每通道板数
+    
+    # 实际LED光量子效率
+    # 注意：这些是现代LED的实际效率值，比标准方法高1000+倍
+    # 如需匹配论文数值范围，可以调整为更低的值
+    led_efficiency:
+      red: 0.0015   # μmol/J (匹配论文数值范围)
+      blue: 0.0012  # μmol/J (匹配论文数值范围)
+    
+    # 系统效率分量
+    efficiency:
+      driver: 0.85      # 驱动器效率
+      thermal: 0.90     # 热效率
+      optical: 0.85     # 光学效率
+
+# 结果保存配置
+results:
+  # 结果文件夹前缀
+  folder_prefix: "detail_"
+  
+  # 保存文件配置
+  save_csv: true              # 保存Pareto解集CSV
+  save_json: true             # 保存最优解JSON
+  save_config: true           # 保存配置信息
+  save_visualization: true    # 保存可视化图表
+  save_heatmap: true          # 保存解分布热图
+  
+  # 图表配置
+  visualization:
+    dpi: 300
+    format: "png"
+    figsize: [15, 12]
+    heatmap_figsize: [16, 6]
+
+# 实验配置
+experiment:
+  name: "detail_moo_"
+  description: "多目标优化寻找最优种植条件"
+  log_level: "INFO"
+  random_seed: 42 

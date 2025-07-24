@@ -1,0 +1,3 @@
+from integrated_workflow.workflow_manager.integrated_workflow_manager import IntegratedWorkflowManager
+
+__all__ = ['IntegratedWorkflowManager']

@@ -1,0 +1,69 @@
+# 论文数据集配置文件
+# 专门用于 "Data of Paper.csv" 数据集
+
+# 数据配置
+data:
+  # 数据文件路径
+  data_path: "Data/Data of Paper.csv"
+  
+  # 输入特征列名（论文数据集只有3个特征）
+  features:
+    - "PPFD"    # 光量子通量密度 (μmol·m⁻²·s⁻¹)
+    - "CO2"     # CO2浓度 (ppm) 
+    - "T"       # 温度 (°C)
+  
+  # 目标变量列名
+  target: "Pn"  # 光合速率 (μmol·m⁻²·s⁻¹)
+  
+  # 数据分割参数
+  test_size: 0.2
+  random_state: 42
+  
+  # 标准化方法
+  normalize_method: "standard"
+
+# 模型配置 - LSSVR模型
+model:
+  model_type: "LSSVR"
+  kernel: "rbf"
+  
+  # LSSVR 参数
+  gamma: 1.0
+  sigma2: 1.0
+
+# 优化配置
+optimization:
+  # 使用 CMA-ES 优化器
+  optimizer_type: "CMAES"
+  
+  # CMA-ES 参数
+  n_trials: 100
+  cmaes_population_size: 20
+  cmaes_sigma0: 0.3
+  cmaes_seed: 42
+  
+  # 参数搜索边界
+  param_bounds:
+    # LSSVR参数边界
+    gamma: [0.001, 100]  # 核函数宽度参数
+    sigma2: [0.001, 100] # 正则化参数
+
+# 评估配置
+evaluation:
+  cv_folds: 5
+  metrics:
+    - "rmse"
+    - "r2" 
+    - "mae"
+  
+  plot_size: [12, 8]
+  save_plots: true
+  plot_format: "png"
+
+# 实验配置
+experiment:
+  name: "paper_data_photosynthesis"
+  results_dir: "results_pape"
+  models_dir: "models"
+  log_level: "INFO"
+  log_file: "experiment.log" 

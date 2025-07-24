@@ -1,0 +1,47 @@
+data:
+  data_path: "Data/averaged_data.csv"
+  features: ['PPFD', 'CO2', 'T', 'R:B']
+  target: "Pn_avg"
+  test_size: 0.2
+  random_state: 42
+  normalize_method: "standard"
+
+model:
+  model_type: "GPR"
+  kernel: "rbf"
+  # GPR参数的默认值
+  alpha: 1e-10
+  n_restarts_optimizer: 10
+  length_scale: 1.0
+  constant_value: 1.0
+  noise_level: 1e-10
+
+optimization:
+  optimizer_type: "CMAES"
+  n_trials: 100  # 增加试验次数以获得更好的结果
+  
+  # CMA-ES特定参数
+  cmaes_population_size: 20  # 设置合适的种群大小
+  
+  # 参数搜索范围 - 更新后的合理范围
+  param_bounds:
+    # GPR核函数参数
+    length_scale: [1e-2, 1e2]  # 缩小搜索范围，避免数值不稳定
+    constant_value: [1e-2, 1e2]  # 缩小搜索范围，避免数值不稳定
+    noise_level: [1e-8, 1.0]  # 调整噪声水平范围
+    alpha: [1e-8, 1.0]  # 调整正则化参数范围
+    n_restarts_optimizer: [5, 20]  # 优化器重启次数
+    
+evaluation:
+  cv_folds: 5
+  metrics: ['rmse', 'r2', 'mae', 'mean_std', 'max_std']
+  plot_size: [12, 8]
+  save_plots: true
+  plot_format: "png"
+
+experiment:
+  name: "gpr_cmaes_optimization"
+  results_dir: "results"
+  models_dir: "models"
+  log_level: "INFO"
+  log_file: "gpr_cmaes_optimization.log" 

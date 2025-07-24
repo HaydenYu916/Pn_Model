@@ -1,0 +1,14 @@
+2025-07-18 00:06:54 - root - INFO - 日志系统初始化完成，级别: INFO, 文件: integrated_workflow/results/workflow_20250718_000654/workflow.log
+2025-07-18 00:06:54 - __main__ - INFO - ============================================================
+2025-07-18 00:06:54 - __main__ - INFO - 集成优化流程系统启动
+2025-07-18 00:06:54 - __main__ - INFO - 时间: 2025-07-18 00:06:54
+2025-07-18 00:06:54 - __main__ - INFO - 配置文件: integrated_workflow/config/workflow_config.yaml
+2025-07-18 00:06:54 - __main__ - INFO - 执行阶段: all
+2025-07-18 00:06:54 - __main__ - INFO - 结果目录: integrated_workflow/results/workflow_20250718_000654
+2025-07-18 00:06:54 - __main__ - INFO - 干运行模式: 仅验证配置
+2025-07-18 00:06:54 - __main__ - INFO - ============================================================
+2025-07-18 00:06:54 - __main__ - INFO - 加载配置文件...
+2025-07-18 00:06:54 - __main__ - INFO - 验证配置...
+2025-07-18 00:06:54 - integrated_workflow.utils.config_utils - INFO - 开始验证配置...
+2025-07-18 00:06:54 - integrated_workflow.utils.config_utils - INFO - 配置验证通过
+2025-07-18 00:06:54 - __main__ - INFO - 配置验证通过，干运行模式完成

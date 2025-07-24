@@ -1,0 +1,274 @@
+{
+    "model_path": "../ML_Framework/results/LSSVR_GA_20250715_113420/models/optimized_lssvr_model.pkl",
+    "algorithm": "SPEA2",
+    "co2": 400.0,
+    "temp": 24.0,
+    "generations": 50,
+    "pop_size": 30,
+    "timestamp": "20250715_163628",
+    "config_used": {
+        "model": {
+            "model_path": "../ML_Framework/results/LSSVR_GA_20250715_113420/models/optimized_lssvr_model.pkl"
+        },
+        "problem": {
+            "variables": {
+                "optimization_mode": "continuous",
+                "ppfd": {
+                    "min": 50,
+                    "max": 1000,
+                    "values": [
+                        50,
+                        100,
+                        150,
+                        200,
+                        250,
+                        300,
+                        350,
+                        400,
+                        450,
+                        500,
+                        550,
+                        600,
+                        650,
+                        700,
+                        750,
+                        800,
+                        850,
+                        900,
+                        950,
+                        1000
+                    ]
+                },
+                "rb_ratio": {
+                    "min": 0.5,
+                    "max": 1.0,
+                    "values": [
+                        0.5,
+                        0.75,
+                        0.83,
+                        0.88,
+                        1.0
+                    ]
+                }
+            },
+            "objectives": {
+                "cled_weight": 0.5,
+                "pn_weight": 0.5,
+                "enable_normalization": true
+            }
+        },
+        "algorithm": {
+            "algorithm_type": "SPEA2",
+            "population_size": 30,
+            "n_generations": 50,
+            "eliminate_duplicates": true,
+            "nsga2": {
+                "crossover": {
+                    "type": "SBX",
+                    "prob": 0.9,
+                    "eta": 15
+                },
+                "mutation": {
+                    "type": "PM",
+                    "prob": 0.1,
+                    "eta": 20
+                }
+            },
+            "nsga3": {
+                "ref_dirs": {
+                    "type": "das-dennis",
+                    "n_partitions": 12
+                },
+                "crossover": {
+                    "type": "SBX",
+                    "prob": 0.9,
+                    "eta": 30
+                },
+                "mutation": {
+                    "type": "PM",
+                    "prob": 0.1,
+                    "eta": 20
+                }
+            },
+            "spea2": {
+                "archive_size": 100,
+                "crossover": {
+                    "type": "SBX",
+                    "prob": 0.9,
+                    "eta": 15
+                },
+                "mutation": {
+                    "type": "PM",
+                    "prob": 0.1,
+                    "eta": 20
+                }
+            },
+            "moead": {
+                "n_neighbors": 15,
+                "decomposition": "pbi",
+                "prob_neighbor_mating": 0.7,
+                "crossover": {
+                    "type": "SBX",
+                    "prob": 0.9,
+                    "eta": 20
+                },
+                "mutation": {
+                    "type": "PM",
+                    "prob": 0.1,
+                    "eta": 20
+                }
+            },
+            "rnsga2": {
+                "epsilon": 0.01,
+                "crossover": {
+                    "type": "SBX",
+                    "prob": 0.9,
+                    "eta": 15
+                },
+                "mutation": {
+                    "type": "PM",
+                    "prob": 0.1,
+                    "eta": 20
+                }
+            },
+            "rnsga3": {
+                "epsilon": 0.01,
+                "ref_dirs": {
+                    "type": "das-dennis",
+                    "n_partitions": 12
+                },
+                "crossover": {
+                    "type": "SBX",
+                    "prob": 0.9,
+                    "eta": 30
+                },
+                "mutation": {
+                    "type": "PM",
+                    "prob": 0.1,
+                    "eta": 20
+                }
+            },
+            "sms": {
+                "crossover": {
+                    "type": "SBX",
+                    "prob": 0.9,
+                    "eta": 15
+                },
+                "mutation": {
+                    "type": "PM",
+                    "prob": 0.1,
+                    "eta": 20
+                }
+            },
+            "rvea": {
+                "adaptation_frequency": 0.1,
+                "crossover": {
+                    "type": "SBX",
+                    "prob": 0.9,
+                    "eta": 15
+                },
+                "mutation": {
+                    "type": "PM",
+                    "prob": 0.1,
+                    "eta": 20
+                }
+            },
+            "age": {
+                "crossover": {
+                    "type": "SBX",
+                    "prob": 0.9,
+                    "eta": 15
+                },
+                "mutation": {
+                    "type": "PM",
+                    "prob": 0.1,
+                    "eta": 20
+                }
+            },
+            "age2": {
+                "crossover": {
+                    "type": "SBX",
+                    "prob": 0.9,
+                    "eta": 15
+                },
+                "mutation": {
+                    "type": "PM",
+                    "prob": 0.1,
+                    "eta": 20
+                }
+            },
+            "ctaea": {
+                "crossover": {
+                    "type": "SBX",
+                    "prob": 0.9,
+                    "eta": 15
+                },
+                "mutation": {
+                    "type": "PM",
+                    "prob": 0.1,
+                    "eta": 20
+                }
+            }
+        },
+        "cled": {
+            "calculation_method": "detailed",
+            "standard": {
+                "carbon_factor": 581.0,
+                "surface_area": 1.0,
+                "conversion_factor": 3600,
+                "led_efficiency": {
+                    "red": 0.0015,
+                    "blue": 0.0012
+                },
+                "system_efficiency": 1.0
+            },
+            "detailed": {
+                "carbon_factor": 581.0,
+                "surface_area": 1.0,
+                "conversion_factor": 3600,
+                "hardware": {
+                    "constant_current": 1.05,
+                    "max_power_per_driver": 75.0,
+                    "red_voltage": 35.0,
+                    "blue_voltage": 45.0,
+                    "boards_per_channel": 2
+                },
+                "led_efficiency": {
+                    "red": 2.8,
+                    "blue": 2.4
+                },
+                "efficiency": {
+                    "driver": 0.92,
+                    "thermal": 0.95,
+                    "optical": 0.9
+                }
+            }
+        },
+        "results": {
+            "folder_prefix": "detail_",
+            "save_csv": true,
+            "save_json": true,
+            "save_config": true,
+            "save_visualization": true,
+            "save_heatmap": true,
+            "visualization": {
+                "dpi": 300,
+                "format": "png",
+                "figsize": [
+                    15,
+                    12
+                ],
+                "heatmap_figsize": [
+                    16,
+                    6
+                ]
+            }
+        },
+        "experiment": {
+            "name": "detail_moo_",
+            "description": "\u591a\u76ee\u6807\u4f18\u5316\u5bfb\u627e\u6700\u4f18\u79cd\u690d\u6761\u4ef6",
+            "log_level": "INFO",
+            "random_seed": 42
+        }
+    }
+}

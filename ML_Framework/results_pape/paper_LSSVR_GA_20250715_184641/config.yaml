@@ -1,0 +1,68 @@
+data:
+  data_path: Data/Data of Paper.csv
+  features:
+  - PPFD
+  - CO2
+  - T
+  normalize_method: standard
+  random_state: 42
+  target: Pn
+  test_size: 0.2
+evaluation:
+  cv_folds: 5
+  metrics:
+  - rmse
+  - r2
+  - mae
+  plot_format: png
+  plot_size:
+  - 12
+  - 8
+  save_plots: true
+experiment:
+  log_file: experiment.log
+  log_level: INFO
+  models_dir: models
+  name: paper_data_photosynthesis
+  results_dir: results_pape
+model:
+  C: 1.0
+  alpha: 1.0e-10
+  constant_value: 1.0
+  dgp_alpha: 1.0e-06
+  epsilon: 0.1
+  gamma: 1.0
+  kernel: rbf
+  length_scale: 1.0
+  model_type: LSSVR
+  n_layers: 2
+  n_restarts_optimizer: 10
+  noise_level: 1.0e-10
+  sigma2: 1.0
+optimization:
+  c1: 2.0
+  c2: 2.0
+  cmaes_population_size: 20
+  cmaes_seed: 42
+  cmaes_sigma0: 0.3
+  crossover_rate: 0.8
+  generations: 50
+  mutation_rate: 0.2
+  n_butterflies: 20
+  n_iterations: 50
+  n_particles: 20
+  n_trials: 100
+  optimizer_type: GA
+  param_bounds:
+    gamma:
+    - 0.001
+    - 100
+    sigma2:
+    - 0.001
+    - 100
+  population_size: 20
+  power_exponent: 0.1
+  sensory_modality: 0.01
+  switch_probability: 0.8
+  tournament_size: 3
+  w: 0.9
