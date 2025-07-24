@@ -1,3 +1,4 @@
+import sys
 import os
 import time
 import pandas as pd
@@ -6,6 +7,11 @@ import subprocess
 import shutil
 import yaml
 import json
+
+# 自动将 ML_Framework 目录加入 sys.path，兼容 Mac 和 Linux
+ml_framework_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../ML_Framework'))
+if ml_framework_path not in sys.path:
+    sys.path.insert(0, ml_framework_path)
 
 # ========== 配置 ==========
 CO2_CSV_PATH = os.path.join(os.path.dirname(__file__), 'test.csv')      # CO2 数据路径
@@ -96,10 +102,12 @@ def main_loop():
             if os.path.exists(RB_RESULT_CSV):
                 with open(RB_RESULT_CSV, 'r', encoding='utf-8') as f_id:
                     lines = f_id.readlines()
-                    if len(lines) > 1:
-                        last_id = int(lines[-1].split(',')[0])
-                    else:
-                        last_id = 0
+                    last_id = 0
+                    for line in reversed(lines[1:]):  # 跳过表头
+                        first_field = line.split(',')[0].strip()
+                        if first_field.isdigit():
+                            last_id = int(first_field)
+                            break
             else:
                 last_id = 0
             new_id = last_id + 1

@@ -12,6 +12,7 @@ python find_optimal_conditions_multi_model.py
 """
 import sys
 import os
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -22,6 +23,11 @@ import yaml
 import json
 warnings.filterwarnings('ignore')
 
+
+# 自动将项目根目录加入 sys.path，确保 models 包可用
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 # 统一MPC_Test/results路径
 ROOT_RESULTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), 'results'))
 

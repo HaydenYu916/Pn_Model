@@ -1,0 +1,17 @@
+2025-07-07 16:42:13,744 - BasicExample - INFO - 开始基础示例
+2025-07-07 16:42:13,744 - BasicExample - INFO - 配置创建完成
+2025-07-07 16:42:13,749 - BasicExample - INFO - 数据处理完成: 训练集(480, 4), 测试集(120, 4)
+2025-07-07 16:42:13,749 - BasicExample - INFO - 开始训练LSSVR模型...
+2025-07-07 16:42:13,767 - BasicExample - INFO - LSSVR模型训练完成
+2025-07-07 16:42:13,780 - BasicExample - INFO - LSSVR评估完成: R²=0.9809, RMSE=0.9253
+2025-07-07 16:42:13,780 - BasicExample - INFO - 开始超参数优化...
+2025-07-07 16:42:16,481 - BasicExample - INFO - 优化完成，最佳参数: {'gamma': 0.19939841621816873, 'sigma2': 100.0}
+2025-07-07 16:42:16,500 - BasicExample - INFO - 优化模型评估: R²=0.9855, RMSE=0.8060
+2025-07-07 16:42:17,271 - BasicExample - INFO - 进行预测示例...
+2025-07-07 16:42:17,271 - BasicExample - INFO - 预测示例 (PPFD=500, CO2=400, T=25°C, R:B=0.8): Pn = 15.420
+2025-07-07 16:42:17,272 - BasicExample - INFO - 批量预测结果:
+2025-07-07 16:42:17,272 - BasicExample - INFO -   条件1: PPFD=300, T=20°C → Pn=11.211
+2025-07-07 16:42:17,272 - BasicExample - INFO -   条件2: PPFD=600, T=25°C → Pn=16.083
+2025-07-07 16:42:17,272 - BasicExample - INFO -   条件3: PPFD=900, T=30°C → Pn=17.885
+2025-07-07 16:42:17,272 - BasicExample - INFO - 保存模型和结果...
+2025-07-07 16:42:17,273 - BasicExample - INFO - 基础示例完成！
