@@ -140,7 +140,7 @@ Desktop.ini
 *~
 
 # Project specific
-results/
+# results/
 logs/
 models/
 plots/

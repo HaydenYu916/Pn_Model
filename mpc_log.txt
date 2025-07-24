@@ -11,3 +11,11 @@
 100.0,29.4,294.0,29.0,10.6,32.3
 110.0,34.4,344.2,29.0,11.4,38.2
 119.0,29.4,293.7,29.0,10.6,32.2
+
+
+
+# ========== 配置 ==========
+CO2_CSV_PATH = '/home/pi/mpc/results/test.csv'      # CO2 数据路径
+TEMP_CSV_PATH = '/home/pi/mpc/results/riotee.csv'   # 温度数据路径
+RESULT_DIR = os.path.join(os.path.dirname(__file__), 'result')
+RB_RESULT_CSV = os.path.join(RESULT_DIR, 'rb_result.csv')
