@@ -105,6 +105,7 @@ def main_loop():
             try:
                 if rb is not None:
                     rb_cmd_path = os.path.join(os.path.dirname(__file__), '../results/rb_command.txt')
+                    os.makedirs(os.path.dirname(rb_cmd_path), exist_ok=True)  # 确保目录存在
                     # R:B 表示红光比例（如 0.68），B=1-R:B
                     try:
                         rb_float = float(rb)
