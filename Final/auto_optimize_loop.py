@@ -60,7 +60,10 @@ def main_loop():
 
             # 2. 调用优化脚本（使用 subprocess 标准输入方式）
             env = os.environ.copy()
-            env["PYTHONPATH"] = f"{model_dir}:../ML_Framework:" + env.get("PYTHONPATH", "")
+            # 设置PYTHONPATH为项目根目录和ML_Framework目录，兼容Mac和Linux
+            project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+            ml_framework_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../ML_Framework'))
+            env["PYTHONPATH"] = f"{project_root}:{ml_framework_dir}:" + env.get("PYTHONPATH", "")
             optimize_cmd = [
                 "python3",
                 os.path.abspath(os.path.join(os.path.dirname(__file__), "../MPC_Test/find_optimal_conditions_multi_model.py"))
