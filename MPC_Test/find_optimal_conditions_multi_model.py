@@ -23,6 +23,8 @@ import yaml
 import json
 warnings.filterwarnings('ignore')
 
+import sys
+print("DEBUG sys.path:", sys.path)
 
 # 自动将项目根目录加入 sys.path，确保 models 包可用
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))

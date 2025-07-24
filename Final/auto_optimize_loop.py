@@ -64,6 +64,7 @@ def main_loop():
             project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
             ml_framework_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../ML_Framework'))
             env["PYTHONPATH"] = f"{project_root}:{ml_framework_dir}:" + env.get("PYTHONPATH", "")
+            print("PYTHONPATH for subprocess:", env["PYTHONPATH"])
             optimize_cmd = [
                 "python3",
                 os.path.abspath(os.path.join(os.path.dirname(__file__), "../MPC_Test/find_optimal_conditions_multi_model.py"))
