@@ -109,5 +109,10 @@ def fit_and_knee_analysis(data_path, output_dir=None):
     return fit_params
 
 if __name__ == "__main__":
-    data_path = "../pymoo/results/paper_optimal_conditions_gpr_20250717_144512/pareto_solutions.csv"
-    fit_and_knee_analysis(data_path)
+    import sys
+    if len(sys.argv) >= 2:
+        data_path = sys.argv[1]
+        output_dir = sys.argv[2] if len(sys.argv) > 2 else None
+        fit_and_knee_analysis(data_path, output_dir)
+    else:
+        print("用法: python fit.py <pareto_solutions.csv 路径> [输出目录]")

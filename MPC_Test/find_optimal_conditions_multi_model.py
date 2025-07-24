@@ -419,7 +419,7 @@ def find_best_ppfd(co2, temp, debug_mode=False, batch_dir=None):
 def main():
     co2 = float(input("Please enter CO2 concentration (ppm, e.g., 400): "))
     temp = float(input("Please enter temperature (°C, e.g., 24): "))
-    result = find_best_ppfd(co2, temp, save_csv=True)
+    result = find_best_ppfd(co2, temp)
     print("Optimal solution and input/output appended to csv:", result.get('csv_path', ''))
     import pprint
     pprint.pprint(result)

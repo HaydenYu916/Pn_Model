@@ -49,7 +49,8 @@ except ImportError:
     INSGA2_AVAILABLE = False
     print("⚠️  警告: i-NSGA-II算法不可用，请确保i_nsga2.py文件存在")
 
-CONFIG_PATH = "moo_optimization_config.yaml"
+# CONFIG_PATH = "moo_optimization_config.yaml"
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'moo_optimization_config.yaml')
 
 def load_config(config_path):
     with open(config_path, 'r', encoding='utf-8') as f:
