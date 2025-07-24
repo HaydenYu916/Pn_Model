@@ -1,0 +1,129 @@
+{
+  "timestamp": "2025-07-17T11:53:48.645188",
+  "results": {
+    "experiment_info": {
+      "name": "GPR_CMAES_20250717_114342",
+      "timestamp": "20250717_114342",
+      "config": "Command line parameter overrides configuration"
+    },
+    "data_info": {
+      "total_samples": 600,
+      "features": [
+        "PPFD",
+        "CO2",
+        "T",
+        "R:B"
+      ],
+      "target": "Pn_avg",
+      "feature_ranges": {
+        "PPFD": [
+          0.0,
+          1000.0
+        ],
+        "CO2": [
+          400.0,
+          800.0
+        ],
+        "T": [
+          18.0,
+          30.0
+        ],
+        "R:B": [
+          0.5,
+          1.0
+        ]
+      },
+      "target_range": [
+        -1.9194548878781108,
+        23.99693667391564
+      ],
+      "missing_values": {
+        "PPFD": 0,
+        "CO2": 0,
+        "T": 0,
+        "R:B": 0,
+        "Pn_avg": 0,
+        "count": 0
+      }
+    },
+    "models": {
+      "base": {
+        "type": "GPR",
+        "params": {
+          "alpha": 1e-06,
+          "n_restarts_optimizer": 5
+        },
+        "metrics": {
+          "rmse": 1.8166354030477763,
+          "r2": 0.926467973354852,
+          "mae": 1.287695461994737,
+          "mean_residual": 0.27197594513720047,
+          "std_residual": 1.7961607035210636,
+          "max_error": 5.288532165553361,
+          "mean_std": 1.576191726386535,
+          "max_std": 1.7126519797069093,
+          "confidence_interval_coverage": 0.875,
+          "train_rmse": 1.2515440032351164,
+          "train_r2": 0.9589180139213608,
+          "train_mae": 0.8984860598111565,
+          "train_mean_residual": 0.0012157780532811246,
+          "train_std_residual": 1.2515434127178753,
+          "train_max_error": 4.326357063837513,
+          "train_mean_std": 1.5420268877634877,
+          "train_max_std": 1.7126519748402524,
+          "train_confidence_interval_coverage": 0.96875
+        }
+      },
+      "optimized": {
+        "type": "GPR",
+        "params": {
+          "alpha": 1.3120673679923346e-08,
+          "length_scale": 0.4362842311953216,
+          "constant_value": 1.209506392123233,
+          "noise_level": 1.9583188167232353e-07,
+          "n_restarts_optimizer": 12
+        },
+        "metrics": {
+          "rmse": 0.606989065182008,
+          "r2": 0.9917907643298819,
+          "mae": 0.27361040389929653,
+          "mean_residual": 0.12886625224490103,
+          "std_residual": 0.5931519318714907,
+          "max_error": 4.151320180703959,
+          "mean_std": 0.25198291453275323,
+          "max_std": 1.4312092850742857,
+          "confidence_interval_coverage": 0.9,
+          "train_rmse": 0.06525223441923747,
+          "train_r2": 0.999888326543324,
+          "train_mae": 0.04790979662109076,
+          "train_mean_residual": -3.081134682312997e-05,
+          "train_std_residual": 0.06525222714485711,
+          "train_max_error": 0.23519960638173165,
+          "train_mean_std": 0.12422181800824598,
+          "train_max_std": 0.14048590343405903,
+          "train_confidence_interval_coverage": 1.0
+        }
+      }
+    },
+    "optimization": {
+      "best_params": {
+        "alpha": 1.3120673679923346e-08,
+        "length_scale": 0.4362842311953216,
+        "constant_value": 1.209506392123233,
+        "noise_level": 1.9583188167232353e-07,
+        "n_restarts_optimizer": 12
+      },
+      "best_score": 0.17397880478751623,
+      "optimization_history": "    number     value             datetime_start          datetime_complete  ...                       system_attrs_cma:optimizer:0                       system_attrs_cma:optimizer:1                       system_attrs_cma:optimizer:2     state\n0        0  3.160779 2025-07-17 11:43:44.565465 2025-07-17 11:43:55.459633  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n1        1  0.216665 2025-07-17 11:43:55.460051 2025-07-17 11:44:14.172553  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n2        2  0.216665 2025-07-17 11:44:14.173245 2025-07-17 11:44:41.608640  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n3        3  0.382551 2025-07-17 11:44:41.609395 2025-07-17 11:45:05.303368  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n4        4  0.173979 2025-07-17 11:45:05.303729 2025-07-17 11:45:31.820724  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n5        5  1.606608 2025-07-17 11:45:31.821104 2025-07-17 11:46:13.681103  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n6        6  0.324630 2025-07-17 11:46:13.681820 2025-07-17 11:46:38.901217  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n7        7  0.220235 2025-07-17 11:46:38.901647 2025-07-17 11:47:05.580374  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n8        8  0.399751 2025-07-17 11:47:05.580907 2025-07-17 11:47:45.873034  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n9        9  0.281217 2025-07-17 11:47:45.873751 2025-07-17 11:48:11.820362  ...  80049585080000000000008c0a636d6165732e5f636d61...  00000000000000000f03f947494628c115f6e5f6d61785...  0000000000000000000000000000000000000000000000...  COMPLETE\n10      10  0.216665 2025-07-17 11:48:11.821116 2025-07-17 11:48:37.177792  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n11      11  0.176306 2025-07-17 11:48:37.178731 2025-07-17 11:49:13.166452  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n12      12  0.323936 2025-07-17 11:49:13.166927 2025-07-17 11:49:47.997791  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n13      13  0.327789 2025-07-17 11:49:47.998522 2025-07-17 11:50:21.669073  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n14      14  0.216665 2025-07-17 11:50:21.671011 2025-07-17 11:50:56.122672  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n15      15  0.829246 2025-07-17 11:50:56.123152 2025-07-17 11:51:35.976732  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n16      16  0.176305 2025-07-17 11:51:35.977204 2025-07-17 11:51:58.841525  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n17      17  0.270837 2025-07-17 11:51:58.842018 2025-07-17 11:52:31.035028  ...  800495a7080000000000008c0a636d6165732e5f636d61...  16d6d6194473fb999999999999a8c065f456d65616e946...  00000000000000000000000000000000947494628c055f...  COMPLETE\n18      18  0.176306 2025-07-17 11:52:31.035538 2025-07-17 11:53:09.834343  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n19      19  0.216666 2025-07-17 11:53:09.835111 2025-07-17 11:53:39.689484  ...                                                NaN                                                NaN                                                NaN  COMPLETE\n\n[20 rows x 17 columns]",
+      "study": "<optuna.study.study.Study object at 0x171ae5330>",
+      "n_trials": 20,
+      "n_complete": 20,
+      "n_fail": 0,
+      "n_pruned": 0
+    },
+    "improvement": {
+      "r2_improvement": 0.06532279097502991,
+      "rmse_improvement": 1.2096463378657683
+    }
+  }
+}

@@ -1,0 +1,96 @@
+data:
+  data_path: Data/averaged_data.csv
+  features:
+  - PPFD
+  - CO2
+  - T
+  - R:B
+  normalize_method: standard
+  random_state: 42
+  target: Pn_avg
+  test_size: 0.2
+evaluation:
+  cv_folds: 3
+  metrics:
+  - rmse
+  - r2
+  - mae
+  - mean_std
+  - max_std
+  n_jobs: -1
+  plot_format: png
+  plot_size:
+  - 12
+  - 8
+  save_plots: true
+experiment:
+  log_file: experiment.log
+  log_level: INFO
+  models_dir: models
+  name: photosynthesis_prediction
+  results_dir: results
+model:
+  C: 1.0
+  alpha: 1.0e-06
+  constant_value: 1.0
+  dgp_alpha: 1.0e-06
+  epsilon: 0.1
+  gamma: 0.5
+  kernel: rbf
+  length_scale: 1.0
+  model_type: GPR
+  n_layers: 2
+  n_restarts_optimizer: 5
+  noise_level: 1.0e-06
+  sigma2: 0.5
+optimization:
+  c1: 2.0
+  c2: 2.0
+  cmaes_population_size: 10
+  cmaes_seed: 42
+  cmaes_sigma0: 0.3
+  crossover_rate: 0.4
+  generations: 20
+  mutation_rate: 0.01
+  n_butterflies: 10
+  n_iterations: 20
+  n_particles: 10
+  n_trials: 20
+  optimizer_type: CMAES
+  param_bounds:
+    C:
+    - 0.1
+    - 100
+    alpha:
+    - 1e-8
+    - 1.0
+    constant_value:
+    - 1e-2
+    - 1e2
+    dgp_alpha:
+    - 1e-8
+    - 1.0
+    gamma:
+    - 0.1
+    - 10.0
+    length_scale:
+    - 1e-2
+    - 1e2
+    n_layers:
+    - 1
+    - 4
+    n_restarts_optimizer:
+    - 5
+    - 20
+    noise_level:
+    - 1e-8
+    - 1.0
+    sigma2:
+    - 0.1
+    - 100
+  population_size: 10
+  power_exponent: 0.1
+  sensory_modality: 0.01
+  switch_probability: 0.8
+  tournament_size: 3
+  w: 1.0
