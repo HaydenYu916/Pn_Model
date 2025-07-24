@@ -246,6 +246,24 @@ class MultiObjectiveOptimizer:
         best_idx = np.argmax(pn_values - cled_values/np.max(cled_values))
         print("🌟 Recommended solution (Pn and CLED weighted max):")
         print(df.iloc[best_idx])
+        # 新增：将推荐点写入JSON文件
+        recommended_point = {
+            'PPFD': float(df.iloc[best_idx]['PPFD']),
+            'R:B': float(df.iloc[best_idx]['R:B']),
+            'CLED': float(df.iloc[best_idx]['CLED']),
+            'Pn': float(df.iloc[best_idx]['Pn'])
+        }
+        # 结果目录
+        if MPC_OPT_DEBUG:
+            subdir = os.path.join(self.batch_dir if hasattr(self, 'batch_dir') and self.batch_dir else ROOT_RESULTS_DIR, datetime.datetime.now().strftime('%Y%m%d_%H%M%S'))
+            os.makedirs(subdir, exist_ok=True)
+            recommended_json_path = os.path.join(subdir, 'recommended_point.json')
+            with open(recommended_json_path, 'w', encoding='utf-8') as f:
+                json.dump(recommended_point, f, indent=2, ensure_ascii=False)
+        # 始终写入pymoo/results/recommended_point.json（覆盖）
+        global_recommended_json = os.path.abspath(os.path.join(os.path.dirname(__file__), '../pymoo/results/recommended_point.json'))
+        with open(global_recommended_json, 'w', encoding='utf-8') as f:
+            json.dump(recommended_point, f, indent=2, ensure_ascii=False)
         # debug_mode为true时所有图片和csv直接保存到results/
         # 只要MPC_OPT_DEBUG为True就生成图片和pareto_solutions.csv
         if MPC_OPT_DEBUG:

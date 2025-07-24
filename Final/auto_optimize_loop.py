@@ -83,35 +83,42 @@ def main_loop():
             pareto_csv = os.path.join(latest_dir, 'pareto_solutions.csv')
 
             # 4. 拟合 knee 点
-            fit_cmd = [
-                "python3",
-                os.path.abspath(os.path.join(os.path.dirname(__file__), "../Optimal/fit.py")),
-                pareto_csv,
-                latest_dir
-            ]
-            print(f"运行拟合分析: {' '.join(fit_cmd)}")
-            subprocess.run(fit_cmd, check=True)
+            # fit_cmd = [
+            #     "python3",
+            #     os.path.abspath(os.path.join(os.path.dirname(__file__), "../Optimal/fit.py")),
+            #     pareto_csv,
+            #     latest_dir
+            # ]
+            # print(f"运行拟合分析: {' '.join(fit_cmd)}")
+            # subprocess.run(fit_cmd, check=True)
 
-            # 5. 读取拟合结果并提取 R:B、PPFD、Pn
-            fit_json = os.path.join(latest_dir, 'fit_knee_parameters.json')
-            with open(fit_json, 'r', encoding='utf-8') as f:
-                fit_params = json.load(f)
-            knee = fit_params['knee_point']
-            rb = knee.get('R:B', None)
-            ppfd = knee.get('PPFD', None)
-            pn = knee.get('Pn', None)
+            # 5. 读取推荐点结果并提取 R:B、PPFD、Pn
+            recommended_json = os.path.abspath(os.path.join(os.path.dirname(__file__), '../pymoo/results/recommended_point.json'))
+            with open(recommended_json, 'r', encoding='utf-8') as f:
+                rec = json.load(f)
+            rb = rec.get('R:B', None)
+            ppfd = rec.get('PPFD', None)
+            pn = rec.get('Pn', None)
 
             # 新增：将 R:B 写入 rb_command.txt
             try:
                 if rb is not None:
-                    rb_cmd_path = os.path.join(os.path.dirname(__file__), '../results/rb_command.txt')
+                    rb_cmd_path = '/home/pi/mpc/results/rb_command.txt'
                     os.makedirs(os.path.dirname(rb_cmd_path), exist_ok=True)  # 确保目录存在
                     # R:B 表示红光比例（如 0.68），B=1-R:B
                     try:
                         rb_float = float(rb)
-                        r_pwm = round(rb_float * 255)
-                        b_pwm = round((1 - rb_float) * 255)
+                        rb_str_raw = str(rb_float)
+                        # 提取小数点后三、四位作为百分比
+                        if '.' in rb_str_raw and len(rb_str_raw.split('.')[-1]) >= 4:
+                            percent_str = rb_str_raw.split('.')[-1][2:4]
+                            percent = int(percent_str)
+                        else:
+                            percent = 0  # 不足4位时默认为0
+                        r_pwm = round(percent / 100 * 255)
+                        b_pwm = 255 - r_pwm
                         rb_str = f"{r_pwm},{b_pwm}"
+                        print(f"原始R:B={rb_float}, PWM={rb_str}")
                     except Exception:
                         # 如果不是浮点数，按原逻辑处理
                         if isinstance(rb, (list, tuple)) and len(rb) == 2:
@@ -147,7 +154,7 @@ def main_loop():
             print(f"[错误] {e}")
 
         # 7. 等待 1 分钟
-        time.sleep(60)
+        time.sleep(30)
 
 if __name__ == '__main__':
     main_loop()
